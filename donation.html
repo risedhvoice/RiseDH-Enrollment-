@@ -148,7 +148,6 @@ h1,h2,h3 { font-family:'Outfit',sans-serif; }
 <script>
 const isMobile = /Android/i.test(navigator.userAgent);
 const upiID = "6901471099@ibl";
-const amount = "";
 const note = "Donation";
 
 document.getElementById("upiPayBtn").addEventListener("click", () => {
@@ -176,17 +175,18 @@ function payUPI(app) {
       break;
 
     default:
-      // fallback → system UPI chooser
       link = `upi://pay?pa=${upiID}&pn=Donation&tn=${note}&cu=INR`;
   }
 
-  window.location.href = uplink;
+  window.location.href = link;
 }
 </script>
 
 
+
 </body>
 </html>
+
 
 
 
