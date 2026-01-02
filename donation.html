@@ -45,6 +45,62 @@ h1,h2,h3 { font-family:'Outfit',sans-serif; }
     transform:translateY(-2px);
     box-shadow:0 10px 25px rgba(37,99,235,.4);
 }
+    .upi-apps {
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.upi-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.upi-btn img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.upi-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+/* Brand colors */
+.gpay {
+  background: #ffffff;
+  color: #000;
+}
+
+.phonepe {
+  background: #5f259f;
+  color: #fff;
+}
+
+.paytm {
+  background: #e6f4ff;
+  color: #003a8f;
+}
+
+.other {
+  background: #1f2937;
+  color: #fff;
+}
+
 </style>
 </head>
 
@@ -99,12 +155,31 @@ h1,h2,h3 { font-family:'Outfit',sans-serif; }
     </p>
 
     <button id="upiPayBtn"
-        class="w-full px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl uppercase tracking-widest btn-hover-effect">
+        class="w-full px-8 py-4 bg-blue-600 hover: text-white font-bold rounded-xl uppercase tracking-widest btn-hover-effect">
         Donate with UPI
     </button>
-<button onclick="payUPI('gpay')">Google Pay</button>
-<button onclick="payUPI('phonepe')">PhonePe</button>
-<button onclick="payUPI()">Other UPI Apps</button>
+<!-- UPI App Buttons -->
+<div class="upi-apps">
+  <button class="upi-btn gpay" onclick="payUPI('gpay')">
+    <img src="gpay.png" alt="Google Pay">
+    <span>Google Pay</span>
+  </button>
+
+  <button class="upi-btn phonepe" onclick="payUPI('phonepe')">
+    <img src="phonepe.png" alt="PhonePe">
+    <span>PhonePe</span>
+  </button>
+
+  <button class="upi-btn paytm" onclick="payUPI('paytm')">
+    <img src="paytm.png" alt="Paytm">
+    <span>Paytm</span>
+  </button>
+
+  <button class="upi-btn other" onclick="payUPI()">
+    <span>Other UPI Apps</span>
+  </button>
+</div>
+
 
     <!-- DESKTOP QR -->
     <div id="desktopQR" class="hidden mt-6">
@@ -165,7 +240,10 @@ function payUPI(app) {
   else if (app === "phonepe") {
     url = `intent://pay?pa=${upiID}&pn=Donation&tn=${note}&cu=INR#Intent;scheme=upi;package=com.phonepe.app;end`;
   } 
-  else {
+      else if (app === "paytm") {
+    url = `intent://pay?pa=${upiID}&pn=Donation&tn=${note}&cu=INR#Intent;scheme=upi;package=com.phonepe.app;end`;
+      }
+      else {
     url = `upi://pay?pa=${upiID}&pn=Donation&tn=${note}&cu=INR`;
   }
 
@@ -178,6 +256,7 @@ function payUPI(app) {
 
 </body>
 </html>
+
 
 
 
