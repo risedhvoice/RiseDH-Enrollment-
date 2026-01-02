@@ -146,46 +146,23 @@ h1,h2,h3 { font-family:'Outfit',sans-serif; }
 
 <!-- SCRIPT -->
 <script>
-const isMobile = /Android/i.test(navigator.userAgent);
-const upiID = "6901471099@ibl";
-const note = "Donation";
+const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+const upiLink = "upi://pay?pa=6901471099@ibl&cu=INR";
 
 document.getElementById("upiPayBtn").addEventListener("click", () => {
   if (isMobile) {
-    document.getElementById("upiOptions").classList.remove("hidden");
+    window.location.href = upiLink;
   } else {
     document.getElementById("desktopQR").classList.remove("hidden");
   }
 });
-
-function payUPI(app) {
-  let link = "";
-
-  switch(app) {
-    case "phonepe":
-      link = `phonepe://pay?pa=${upiID}&pn=Donation&tn=${note}&cu=INR`;
-      break;
-
-    case "gpay":
-      link = `tez://upi/pay?pa=${upiID}&pn=Donation&tn=${note}&cu=INR`;
-      break;
-
-    case "paytm":
-      link = `paytmmp://pay?pa=${upiID}&pn=Donation&tn=${note}&cu=INR`;
-      break;
-
-    default:
-      link = `upi://pay?pa=${upiID}&pn=Donation&tn=${note}&cu=INR`;
-  }
-
-  window.location.href = link;
-}
 </script>
 
 
 
 </body>
 </html>
+
 
 
 
