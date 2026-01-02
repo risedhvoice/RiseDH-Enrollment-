@@ -156,8 +156,9 @@ h1,h2,h3 { font-family:'Outfit',sans-serif; }
 
     <button id="upiPayBtn"
         class="w-full px-8 py-4 bg-blue-600 hover: text-white font-bold rounded-xl uppercase tracking-widest btn-hover-effect">
-        Donate with UPI
+        scan this qr code 
     </button>
+    <img src="upi-qr.jpg"height="200px">
 <!-- UPI App Buttons -->
 <div class="upi-apps">
   <button class="upi-btn gpay" onclick="payUPI('gpay')">
@@ -223,39 +224,14 @@ h1,h2,h3 { font-family:'Outfit',sans-serif; }
 </footer>
 
 <!-- SCRIPT -->
-<script>
-function payUPI(app) {
-  const upiID = "6901471099@ibl";
-  const note = "Donation";
-  let url = "";
 
-  if (!/Android/i.test(navigator.userAgent)) {
-    alert("Please use an Android phone");
-    return;
-  }
-
-  if (app === "gpay") {
-    url = `intent://pay?pa=${upiID}&pn=Donation&tn=${note}&cu=INR#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`;
-  } 
-  else if (app === "phonepe") {
-    url = `intent://pay?pa=${upiID}&pn=Donation&tn=${note}&cu=INR#Intent;scheme=upi;package=com.phonepe.app;end`;
-  } 
-      else if (app === "paytm") {
-    url = `intent://pay?pa=${upiID}&pn=Donation&tn=${note}&cu=INR#Intent;scheme=upi;package=com.phonepe.app;end`;
-      }
-      else {
-    url = `upi://pay?pa=${upiID}&pn=Donation&tn=${note}&cu=INR`;
-  }
-
-  window.location.href = url;
-}
-</script>
 
 
 
 
 </body>
 </html>
+
 
 
 
