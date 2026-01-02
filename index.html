@@ -93,7 +93,16 @@
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <button id="joinBtn" class="px-10 py-5 bg-blue-600 text-white font-bold rounded-xl text-lg uppercase tracking-wider btn-hover-effect">
                     Join Us
-                </button>
+                
+            </button>
+                <section class="mt-20 max-w-2xl mx-auto text-center">
+  <h2 class="text-3xl font-bold mb-6 text-blue-500">
+    ❤️ Our Donors
+  </h2>
+
+  <ul id="donorList" class="space-y-3 text-lg"></ul>
+</section>
+
                 <br>
                 <br>
             </div>
@@ -114,6 +123,8 @@
                 
             
         </div>
+        
+
     </main>
 
     <!-- Footer Stats / Info -->
@@ -156,10 +167,36 @@
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         });
     </script>
+    <script>
+const DONOR_API = "https://script.google.com/macros/s/AKfycbzlb5fNSfNprV_q4etnvcS7ZDRYc6bmYs9e2Kkv9ItJ7434Z4Cmt3GTLRlut5pXD909fg/exec;
+
+fetch(DONOR_API)
+  .then(res => res.json())
+  .then(data => {
+    const list = document.getElementById("donorList");
+
+    if (data.length === 0) {
+      list.innerHTML = "<li>No donors yet</li>";
+      return;
+    }
+
+    data.forEach(donor => {
+      const li = document.createElement("li");
+      li.className = "glass p-3 rounded-xl";
+      
+      list.appendChild(li);
+    });
+  })
+  .catch(err => {
+    console.error(err);
+  });
+</script>
+
 </body>
 
 
 </html>
+
 
 
 
