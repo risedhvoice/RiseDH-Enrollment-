@@ -439,21 +439,4 @@
 
 </body>
 </html>
-⚠️ Make sure your Google Apps Script has this code:
 
-function doPost(e) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  var data = JSON.parse(e.postData.contents);
-  
-  var newRow = [
-    new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-    data.fullName || '',
-    data.email || '',
-    data.phone || ''
-  ];
-  
-  sheet.appendRow(newRow);
-  
-  return ContentService.createTextOutput(JSON.stringify({ 'status': 'success' }))
-    .setMimeType(ContentService.MimeType.JSON);
-}
