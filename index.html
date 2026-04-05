@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>enrollment with us | ft- RiseDH ,Join the Movement</title>
+    <title>Enrollment with us | ft- RiseDH, Join the Movement</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@700;900&display=swap" rel="stylesheet">
     <style>
@@ -33,8 +33,8 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .red-accent-shadow {
-            text-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+        .blue-accent-shadow {
+            text-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
         }
 
         .btn-hover-effect {
@@ -43,10 +43,9 @@
 
         .btn-hover-effect:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px -5px rgba(220, 38, 38, 0.5);
+            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.5);
         }
 
-        /* Smooth scroll animation */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -57,6 +56,144 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: rgba(20, 20, 20, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Form Styles */
+        .form-input {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: #2563eb;
+            background: rgba(37, 99, 235, 0.1);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .form-input:invalid:not(:placeholder-shown) {
+            border-color: #ef4444;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+        }
+
+        .form-label span.required {
+            color: #ef4444;
+            margin-left: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .btn-loading .spinner {
+            display: inline-block;
+        }
+
+        .btn-loading .btn-text {
+            opacity: 0.7;
+        }
+
+        /* Success message */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-message.active {
+            display: block;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(34, 197, 94, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .success-icon svg {
+            width: 40px;
+            height: 40px;
+            color: #22c55e;
+        }
     </style>
 </head>
 <body class="bg-image min-h-screen flex flex-col items-center justify-between">
@@ -64,21 +201,16 @@
     <!-- Navigation -->
     <nav class="w-full px-6 py-8 flex justify-between items-center max-w-7xl mx-auto z-10">
         <div class="flex items-center gap-3">
-            <!-- New Logo replacing the SVG icon -->
             <img src="RiseDH-photoroom.jpg" alt="RiseDH Logo" class="h-10 w-auto object-contain">
-            <!-- Brand text updated from UrbanRenew to RiseDH -->
-           
         </div>
         <div class="hidden md:flex gap-8 text-sm font-medium uppercase tracking-widest text-gray-400">
-              
-           
         </div>
     </nav>
 
     <!-- Main Content -->
     <main class="flex-grow flex flex-col items-center justify-center text-center px-4 max-w-4xl mx-auto z-10">
         <div class="reveal active">
-            <span class="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-[0.2em] uppercase bg-blue-600/20 text-black-500 rounded-full border border-black-600/30">
+            <span class="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-[0.2em] uppercase bg-blue-600/20 text-blue-400 rounded-full border border-blue-600/30">
                 Cleaning Initiative
             </span>
             
@@ -86,72 +218,190 @@
                 <span class="text-blue-600 font-extrabold blue-accent-shadow">JOIN US TO SEE IT CLEAN</span>
             </h1>
 
-            <p class="text-lg md:text-xl text-black-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+            <p class="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
                 for our place.
             </p>
+            
             <section class="mt-20 max-w-2xl mx-auto text-center">
- 
-  <ul id="donorList" class="space-y-3 text-lg"></ul>
-</section>
+                <ul id="donorList" class="space-y-3 text-lg"></ul>
+            </section>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button id="joinBtn" class="px-10 py-5 bg-blue-600 text-white font-bold rounded-xl text-lg uppercase tracking-wider ">
+                <button id="joinBtn" class="px-10 py-5 bg-blue-600 text-white font-bold rounded-xl text-lg uppercase tracking-wider btn-hover-effect">
                     Join Us
-                
-            </button>
-                
-
-                <br>
-                <br>
+                </button>
             </div>
-        
-          
-                <div>
-    <a href="view -Langting.html" class="px-10 py-5 bg-blue-600 text-white font-bold rounded-xl text-lg uppercase tracking-wider ">
-        Langting Right now
-    </a>
-</div>
-            <br>
-            <br>
-         <div>
-                <a href="donation.html"class="px-10 py-4 bg-transparent border border-white/20 hover:bg-white/10 text-white font-bold rounded-xl text-lg uppercase tracking-wider transition-all inline-block text-center">
-        donate us
-    </a>
-            </div>
-                
             
+            <br><br>
+            
+            <div>
+                <a href="view-Langting.html" class="px-10 py-5 bg-blue-600 text-white font-bold rounded-xl text-lg uppercase tracking-wider btn-hover-effect inline-block">
+                    Langting Right now
+                </a>
+            </div>
+            
+            <br><br>
+            
+            <div>
+                <a href="donation.html" class="px-10 py-4 bg-transparent border border-white/20 hover:bg-white/10 text-white font-bold rounded-xl text-lg uppercase tracking-wider transition-all inline-block text-center">
+                    Donate Us
+                </a>
+            </div>
         </div>
-        
-
     </main>
 
-    <!-- Footer Stats / Info -->
+    <!-- Enrollment Form Modal -->
+    <div id="formModal" class="modal-overlay">
+        <div class="modal-content">
+            <!-- Form Header -->
+            <div class="p-6 border-b border-white/10">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-2xl font-bold text-white">Join RiseDH</h2>
+                    <button id="closeModal" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <p class="text-gray-400 text-sm mt-2">Fill in your details to join the movement</p>
+            </div>
+
+            <!-- Form Content -->
+            <form id="enrollmentForm" class="p-6">
+                <div class="form-group">
+                    <label class="form-label">Full Name <span class="required">*</span></label>
+                    <input type="text" name="fullName" class="form-input" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email Address <span class="required">*</span></label>
+                    <input type="email" name="email" class="form-input" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Phone Number <span class="required">*</span></label>
+                    <input type="tel" name="phone" class="form-input" placeholder="Enter your phone number" required>
+                </div>
+
+                <button type="submit" id="submitBtn" class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-lg uppercase tracking-wider btn-hover-effect flex items-center justify-center transition-colors">
+                    <span class="spinner"></span>
+                    <span class="btn-text">Submit Enrollment</span>
+                </button>
+            </form>
+
+            <!-- Success Message -->
+            <div id="successMessage" class="success-message">
+                <div class="success-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-2">Thank You!</h3>
+                <p class="text-gray-400 mb-6">Your enrollment has been submitted successfully. We'll contact you soon!</p>
+                <button id="closeSuccess" class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-colors">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer class="w-full p-8 z-10">
         <div class="max-w-7xl mx-auto glass rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-8">
             <div class="flex gap-12 text-center md:text-left">
-               
-                
             </div>
-            
-            <div class="text-sm text-black-500 font-medium">
-                © 2026 RiseDH-ft Langting GEN -Z. Let's make the Town shine.
+            <div class="text-sm text-gray-500 font-medium">
+                © 2026 RiseDH-ft Langting GEN-Z. Let's make the Town shine.
             </div>
         </div>
     </footer>
 
     <script>
-        // Handle Form Redirection
-        document.getElementById('joinBtn').addEventListener('click', function() {
-            // Updated with your actual Google Form Link
-            const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfs5JDta8lrQ8EcUeLF93hPnf74BpWtxBhNU2YD4s3WwyF54w/viewform?usp=publish-editor";
-            
-            // Add a small delay for button animation feel
-            setTimeout(() => {
-                window.open(formUrl, '_blank');
-            }, 200);
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx15-9vZ8XqVS_IZwDR7U0fCMg-L0dh5VGEjQts5ROsJrjUIQUkSSNb3hcqYn2m_TOy6Q/exec";
+        
+        // Modal Elements
+        const modal = document.getElementById('formModal');
+        const joinBtn = document.getElementById('joinBtn');
+        const closeModal = document.getElementById('closeModal');
+        const form = document.getElementById('enrollmentForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('successMessage');
+        const closeSuccess = document.getElementById('closeSuccess');
+
+        // Open Modal
+        joinBtn.addEventListener('click', function() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         });
 
-        // Simple scroll reveal animation for smooth entrance
+        // Close Modal
+        function closeModalFunc() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            form.reset();
+            form.style.display = 'block';
+            successMessage.classList.remove('active');
+        }
+
+        closeModal.addEventListener('click', closeModalFunc);
+        closeSuccess.addEventListener('click', closeModalFunc);
+
+        // Close on overlay click
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModalFunc();
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModalFunc();
+            }
+        });
+
+        // Form Submission
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Show loading state
+            submitBtn.classList.add('btn-loading');
+            submitBtn.disabled = true;
+
+            // Collect form data
+            const formData = new FormData(form);
+            const data = {
+                fullName: formData.get('fullName'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                timestamp: new Date().toISOString()
+            };
+
+            try {
+                // Send data to Google Sheets via Apps Script
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                // Show success message
+                form.style.display = 'none';
+                successMessage.classList.add('active');
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('There was an error submitting your form. Please try again.');
+            } finally {
+                submitBtn.classList.remove('btn-loading');
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Scroll reveal animation
         window.addEventListener('DOMContentLoaded', () => {
             const observerOptions = { threshold: 0.1 };
             const observer = new IntersectionObserver((entries) => {
@@ -164,47 +414,46 @@
 
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         });
+
+        // Donor list fetch
+        const DONOR_API = "https://script.google.com/macros/s/AKfycbzlb5fNSfNprV_q4etnvcS7ZDRYc6bmYs9e2Kkv9ItJ7434Z4Cmt3GTLRlut5pXD909fg/exec";
+
+        fetch(DONOR_API)
+            .then(res => res.json())
+            .then(data => {
+                const list = document.getElementById("donorList");
+                if (data.length === 0) {
+                    list.innerHTML = "<li>No donors yet</li>";
+                    return;
+                }
+                data.forEach(donor => {
+                    const li = document.createElement("li");
+                    li.className = "glass p-3 rounded-xl";
+                    list.appendChild(li);
+                });
+            })
+            .catch(err => {
+                console.error(err);
+            });
     </script>
-    <script>
-const DONOR_API = "https://script.google.com/macros/s/AKfycbzlb5fNSfNprV_q4etnvcS7ZDRYc6bmYs9e2Kkv9ItJ7434Z4Cmt3GTLRlut5pXD909fg/exec;
-
-fetch(DONOR_API)
-  .then(res => res.json())
-  .then(data => {
-    const list = document.getElementById("donorList");
-
-    if (data.length === 0) {
-      list.innerHTML = "<li>No donors yet</li>";
-      return;
-    }
-
-    data.forEach(donor => {
-      const li = document.createElement("li");
-      li.className = "glass p-3 rounded-xl";
-      
-      list.appendChild(li);
-    });
-  })
-  .catch(err => {
-    console.error(err);
-  });
-</script>
 
 </body>
-
-
 </html>
+⚠️ Make sure your Google Apps Script has this code:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = JSON.parse(e.postData.contents);
+  
+  var newRow = [
+    new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+    data.fullName || '',
+    data.email || '',
+    data.phone || ''
+  ];
+  
+  sheet.appendRow(newRow);
+  
+  return ContentService.createTextOutput(JSON.stringify({ 'status': 'success' }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
