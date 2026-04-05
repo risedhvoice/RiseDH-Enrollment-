@@ -370,22 +370,22 @@ select.form-input option {
 
     <!-- UPI App Buttons -->
     <div class="upi-apps">
-        <a href="gpay://upi/pay?pa=6901471099@ibl&pn=RiseDH&cu=INR" class="upi-btn gpay">
+        <a href="#" class="upi-btn gpay" onclick="handleUPI(event, 'gpay')">
             <img src="gpay.png" alt="Google Pay">
             <span>Google Pay</span>
         </a>
 
-        <a href="phonepe://pay?pa=6901471099@ibl&pn=RiseDH&cu=INR" class="upi-btn phonepe">
+        <a href="#" class="upi-btn phonepe" onclick="handleUPI(event, 'phonepe')">
             <img src="phonepe.png" alt="PhonePe">
             <span>PhonePe</span>
         </a>
 
-        <a href="paytmmp://pay?pa=6901471099@ibl&pn=RiseDH&cu=INR" class="upi-btn paytm">
+        <a href="#" class="upi-btn paytm" onclick="handleUPI(event, 'paytm')">
             <img src="paytm.png" alt="Paytm">
             <span>Paytm</span>
         </a>
 
-        <a href="upi://pay?pa=6901471099@ibl&pn=RiseDH&cu=INR" class="upi-btn other">
+        <a href="#" class="upi-btn other" onclick="handleUPI(event, 'other')">
             <span>Other UPI</span>
         </a>
     </div>
@@ -420,7 +420,6 @@ select.form-input option {
 <!-- MATERIAL DONATION FORM MODAL -->
 <div id="donationModal" class="modal-overlay">
     <div class="modal-content">
-        <!-- Form Header -->
         <div class="p-6 border-b border-white/10">
             <div class="flex justify-between items-center">
                 <h2 class="text-2xl font-bold text-white">Donate Items</h2>
@@ -433,9 +432,7 @@ select.form-input option {
             <p class="text-gray-400 text-sm mt-2">Fill in your details to donate masks, gloves, or supplies</p>
         </div>
 
-        <!-- Form Content -->
         <form id="donationForm" class="p-6">
-            <!-- Donor Type -->
             <div class="form-group">
                 <label class="form-label">Donor Type <span class="required">*</span></label>
                 <div class="radio-group">
@@ -450,19 +447,16 @@ select.form-input option {
                 </div>
             </div>
 
-            <!-- Name -->
             <div class="form-group">
                 <label class="form-label">Name / Organization <span class="required">*</span></label>
                 <input type="text" name="name" class="form-input" placeholder="Enter your name or organization" required>
             </div>
 
-            <!-- Phone -->
             <div class="form-group">
                 <label class="form-label">Phone Number <span class="required">*</span></label>
                 <input type="tel" name="phone" class="form-input" placeholder="Enter your phone number" required>
             </div>
 
-            <!-- Item Type -->
             <div class="form-group">
                 <label class="form-label">Item Type <span class="required">*</span></label>
                 <select name="itemType" class="form-input" required>
@@ -475,13 +469,11 @@ select.form-input option {
                 </select>
             </div>
 
-            <!-- Quantity -->
             <div class="form-group">
                 <label class="form-label">Approximate Quantity <span class="required">*</span></label>
                 <input type="text" name="quantity" class="form-input" placeholder="e.g., 100 pieces, 2 boxes" required>
             </div>
 
-            <!-- Location -->
             <div class="form-group">
                 <label class="form-label">Your Location <span class="required">*</span></label>
                 <input type="text" name="location" id="locationInput" class="form-input mb-2" placeholder="Enter your address or use button below" required>
@@ -493,7 +485,6 @@ select.form-input option {
                     <span id="locationBtnText">Get My Location</span>
                 </button>
                 <p id="locationStatus" class="location-status"></p>
-                <!-- Hidden fields for coordinates -->
                 <input type="hidden" name="latitude" id="latitudeInput">
                 <input type="hidden" name="longitude" id="longitudeInput">
             </div>
@@ -504,7 +495,6 @@ select.form-input option {
             </button>
         </form>
 
-        <!-- Success Message -->
         <div id="successMessage" class="success-message">
             <div class="success-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -527,6 +517,64 @@ select.form-input option {
 
 <script>
     const DONATION_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzrOJUnRD6Io0Cb3dgi7U8V_9iUQ6TkVhEbymHs1vmN7ws__TTKxhaYwCTf1hJcq4FIKA/exec";
+
+    // UPI PAYMENT HANDLER
+    function handleUPI(event, app) {
+        event.preventDefault();
+        
+        const upiId = '6901471099@ibl';
+        const name = 'RiseDH';
+        const baseUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&cu=INR`;
+        
+        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        const isAndroid = /Android/i.test(navigator.userAgent);
+        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+        
+        if (!isMobile) {
+            alert('UPI payment works on mobile devices only.\n\nPlease scan the QR code above or copy UPI ID: ' + upiId);
+            return;
+        }
+        
+        let url = baseUrl;
+        
+        if (isAndroid) {
+            switch(app) {
+                case 'gpay':
+                    url = `intent://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&cu=INR#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`;
+                    break;
+                case 'phonepe':
+                    url = `intent://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&cu=INR#Intent;scheme=upi;package=com.phonepe.app;end`;
+                    break;
+                case 'paytm':
+                    url = `intent://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&cu=INR#Intent;scheme=upi;package=net.one97.paytm;end`;
+                    break;
+                default:
+                    url = baseUrl;
+            }
+        } else if (isIOS) {
+            switch(app) {
+                case 'gpay':
+                    url = `gpay://upi/pay?pa=${upiId}&pn=${encodeURIComponent(name)}&cu=INR`;
+                    break;
+                case 'phonepe':
+                    url = `phonepe://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&cu=INR`;
+                    break;
+                case 'paytm':
+                    url = `paytmmp://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&cu=INR`;
+                    break;
+                default:
+                    url = baseUrl;
+            }
+        }
+        
+        window.location.href = url;
+        
+        if (app !== 'other') {
+            setTimeout(() => {
+                window.location.href = baseUrl;
+            }, 2500);
+        }
+    }
 
     // Modal Elements
     const modal = document.getElementById('donationModal');
@@ -564,23 +612,15 @@ select.form-input option {
     closeModal.addEventListener('click', closeModalFunc);
     closeSuccess.addEventListener('click', closeModalFunc);
 
-    // Close on overlay click
     modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            closeModalFunc();
-        }
+        if (e.target === modal) closeModalFunc();
     });
 
-    // Close on Escape key
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
-            closeModalFunc();
-        }
+        if (e.key === 'Escape' && modal.classList.contains('active')) closeModalFunc();
     });
 
-    // ============================================
-    // GEOLOCATION FUNCTIONALITY
-    // ============================================
+    // GEOLOCATION
     function resetLocationButton() {
         getLocationBtn.classList.remove('success', 'error');
         locationBtnText.textContent = 'Get My Location';
@@ -590,76 +630,51 @@ select.form-input option {
     }
 
     getLocationBtn.addEventListener('click', function() {
-        // Check if geolocation is supported
         if (!navigator.geolocation) {
             showLocationError('Geolocation is not supported by your browser. Please enter your address manually.');
             return;
         }
 
-        // Check for HTTPS (required for geolocation on most browsers)
         if (location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
             showLocationError('Location requires HTTPS. Please enter your address manually.');
             return;
         }
 
-        // Show loading state
         getLocationBtn.disabled = true;
         locationBtnText.textContent = 'Getting location...';
         locationStatus.textContent = 'Please allow location access when prompted...';
         locationStatus.style.color = 'rgba(255, 255, 255, 0.6)';
 
-        // Request location with options
-        const options = {
-            enableHighAccuracy: true,
-            timeout: 15000,
-            maximumAge: 0
-        };
-
         navigator.geolocation.getCurrentPosition(
             handleLocationSuccess,
             handleLocationError,
-            options
+            { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
         );
     });
 
     function handleLocationSuccess(position) {
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
-        const accuracy = position.coords.accuracy;
-
-        // Store coordinates
         latitudeInput.value = lat;
         longitudeInput.value = lng;
-
-        // Try to get address using reverse geocoding (free service)
         reverseGeocode(lat, lng);
     }
 
     function reverseGeocode(lat, lng) {
-        // Using free Nominatim API (OpenStreetMap)
-        const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`;
-
-        fetch(url, {
-            headers: {
-                'Accept-Language': 'en'
-            }
+        fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`, {
+            headers: { 'Accept-Language': 'en' }
         })
-        .then(response => {
-            if (!response.ok) throw new Error('Geocoding failed');
-            return response.json();
-        })
+        .then(res => res.json())
         .then(data => {
             if (data && data.display_name) {
                 locationInput.value = data.display_name;
-                showLocationSuccess(`Location found! Accuracy: ~${Math.round(data.accuracy || 50)}m`);
+                showLocationSuccess('Location found!');
             } else {
-                // Fallback to coordinates if address not found
                 locationInput.value = `Lat: ${lat.toFixed(6)}, Lng: ${lng.toFixed(6)}`;
-                showLocationSuccess('Coordinates captured. Address lookup unavailable.');
+                showLocationSuccess('Coordinates captured.');
             }
         })
-        .catch(error => {
-            // Fallback to coordinates
+        .catch(() => {
             locationInput.value = `Lat: ${lat.toFixed(6)}, Lng: ${lng.toFixed(6)}`;
             showLocationSuccess('Location captured as coordinates.');
         });
@@ -667,21 +682,19 @@ select.form-input option {
 
     function handleLocationError(error) {
         let message = '';
-        
         switch(error.code) {
             case error.PERMISSION_DENIED:
-                message = 'Location access denied. Please enable location in your browser settings or enter address manually.';
+                message = 'Location access denied. Please enable location or enter address manually.';
                 break;
             case error.POSITION_UNAVAILABLE:
-                message = 'Location unavailable. Please check your device settings or enter address manually.';
+                message = 'Location unavailable. Please enter address manually.';
                 break;
             case error.TIMEOUT:
-                message = 'Location request timed out. Please try again or enter address manually.';
+                message = 'Location request timed out. Please try again.';
                 break;
             default:
                 message = 'Unable to get location. Please enter your address manually.';
         }
-        
         showLocationError(message);
     }
 
@@ -703,17 +716,12 @@ select.form-input option {
         locationStatus.style.color = '#f87171';
     }
 
-    // ============================================
     // FORM SUBMISSION
-    // ============================================
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
-
-        // Show loading state
         submitBtn.classList.add('btn-loading');
         submitBtn.disabled = true;
 
-        // Collect form data
         const formData = new FormData(form);
         const data = {
             donorType: formData.get('donorType'),
@@ -728,23 +736,16 @@ select.form-input option {
         };
 
         try {
-            // Send data to Google Sheets via Apps Script
-            const response = await fetch(DONATION_SCRIPT_URL, {
+            await fetch(DONATION_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
-
-            // Show success message
             form.style.display = 'none';
             successMessage.classList.add('active');
-
         } catch (error) {
-            console.error('Error:', error);
-            alert('There was an error submitting your form. Please try again.');
+            alert('Error submitting form. Please try again.');
         } finally {
             submitBtn.classList.remove('btn-loading');
             submitBtn.disabled = false;
@@ -755,3 +756,7 @@ select.form-input option {
 </body>
 </html>
 
+
+  
+ 
+    
