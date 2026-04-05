@@ -1,12 +1,13 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang=\"en\">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset=\"UTF-8\">
+<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
 <title>Donate to us | RiseDH</title>
 
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@700;900&display=swap" rel="stylesheet">
+<script src=\"https://cdn.tailwindcss.com\"></script>
+<link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@700;900&display=swap\" rel=\"stylesheet\">
 
 <style>
 body {
@@ -45,206 +46,714 @@ h1,h2,h3 { font-family:'Outfit',sans-serif; }
     transform:translateY(-2px);
     box-shadow:0 10px 25px rgba(37,99,235,.4);
 }
-    .upi-apps {
-  margin-top: 25px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 14px;
-  max-width: 420px;
-  margin-left: auto;
-  margin-right: auto;
+
+.upi-apps {
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 14px;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .upi-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 14px;
-  border-radius: 14px;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  border: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
 }
 
 .upi-btn img {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
 }
 
 .upi-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
 }
 
-/* Brand colors */
-.gpay {
-  background: #ffffff;
-  color: #000;
+.gpay { background: #ffffff; color: #000; }
+.phonepe { background: #5f259f; color: #fff; }
+.paytm { background: #e6f4ff; color: #003a8f; }
+.other { background: #1f2937; color: #fff; }
+
+/* Modal Styles */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
-.phonepe {
-  background: #5f259f;
-  color: #fff;
+.modal-overlay.active {
+    display: flex;
 }
 
-.paytm {
-  background: #e6f4ff;
-  color: #003a8f;
+.modal-content {
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: modalSlideIn 0.3s ease-out;
 }
 
-.other {
-  background: #1f2937;
-  color: #fff;
+@keyframes modalSlideIn {
+    from { opacity: 0; transform: translateY(-30px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
+/* Form Styles */
+.form-input {
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-input:focus {
+    border-color: #22c55e;
+    background: rgba(34, 197, 94, 0.1);
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+}
+
+.form-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+}
+
+.form-label span.required {
+    color: #ef4444;
+    margin-left: 2px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+select.form-input {
+    cursor: pointer;
+    appearance: none;
+    background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E\");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 20px;
+    padding-right: 45px;
+}
+
+select.form-input option {
+    background: #1a1a1a;
+    color: #ffffff;
+}
+
+/* Radio/Checkbox Styles */
+.radio-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.radio-option {
+    flex: 1;
+    min-width: 120px;
+}
+
+.radio-option input {
+    display: none;
+}
+
+.radio-option label {
+    display: block;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.radio-option input:checked + label {
+    background: rgba(34, 197, 94, 0.2);
+    border-color: #22c55e;
+    color: #22c55e;
+}
+
+.radio-option label:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Location Button */
+.location-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: rgba(59, 130, 246, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    border-radius: 12px;
+    color: #60a5fa;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.location-btn:hover {
+    background: rgba(59, 130, 246, 0.3);
+}
+
+.location-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.location-btn.success {
+    background: rgba(34, 197, 94, 0.2);
+    border-color: rgba(34, 197, 94, 0.4);
+    color: #22c55e;
+}
+
+.location-btn.error {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #f87171;
+}
+
+.location-status {
+    font-size: 12px;
+    margin-top: 8px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Spinner */
+.spinner {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.btn-loading .spinner {
+    display: inline-block;
+}
+
+/* Success message */
+.success-message {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.success-message.active {
+    display: block;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(34, 197, 94, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.success-icon svg {
+    width: 40px;
+    height: 40px;
+    color: #22c55e;
+}
 </style>
 </head>
 
-<body class="bg-image min-h-screen flex flex-col">
+<body class=\"bg-image min-h-screen flex flex-col\">
 
 <!-- NAV -->
-<nav class="max-w-7xl mx-auto w-full px-6 py-6 flex justify-between items-center">
-    <img src="RiseDH-photoroom.jpg" class="h-16 rounded-lg bg-black/50">
-    <a href="index.html" class="text-sm font-bold text-gray-400 hover:text-white uppercase tracking-widest">Back Home</a>
+<nav class=\"max-w-7xl mx-auto w-full px-6 py-6 flex justify-between items-center\">
+    <img src=\"RiseDH-photoroom.jpg\" class=\"h-16 rounded-lg bg-black/50\" alt=\"RiseDH Logo\">
+    <a href=\"index.html\" class=\"text-sm font-bold text-gray-400 hover:text-white uppercase tracking-widest\">Back Home</a>
 </nav>
 
 <!-- MAIN -->
-<main class="flex-grow max-w-5xl mx-auto px-4 pb-20">
+<main class=\"flex-grow max-w-5xl mx-auto px-4 pb-20\">
 
 <!-- HEADER -->
-<div class="text-center mb-12">
-    <span class="inline-block px-4 py-1.5 mb-4 text-xs font-bold uppercase bg-green-500/10 text-green-400 rounded-full border border-green-500/20">
+<div class=\"text-center mb-12\">
+    <span class=\"inline-block px-4 py-1.5 mb-4 text-xs font-bold uppercase bg-green-500/10 text-green-400 rounded-full border border-green-500/20\">
         Support The Cause
     </span>
-    <h2 class="text-4xl md:text-6xl font-black mb-4">
-        MAKE A <span class="text-blue-500">DIFFERENCE</span>
+    <h2 class=\"text-4xl md:text-6xl font-black mb-4\">
+        MAKE A <span class=\"text-blue-500\">DIFFERENCE</span>
     </h2>
-    <p class="text-gray-400 max-w-xl mx-auto">
+    <p class=\"text-gray-400 max-w-xl mx-auto\">
         Your contributions support cleaning drives and medical-grade supplies.
     </p>
 </div>
 
 <!-- ITEMS GRID -->
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-    <div class="glass rounded-xl p-2">
-        <img src="gloves.jpg" class="rounded-lg">
-        <p class="text-xs text-center mt-2 uppercase">Safety Gear</p>
+<div class=\"grid grid-cols-2 md:grid-cols-3 gap-4 mb-16\">
+    <div class=\"glass rounded-xl p-2\">
+        <img src=\"gloves.jpg\" class=\"rounded-lg w-full h-32 object-cover\" alt=\"Safety Gear\">
+        <p class=\"text-xs text-center mt-2 uppercase\">Safety Gear</p>
     </div>
-    <div class="glass rounded-xl p-2">
-        <img src="dustbin.png" class="rounded-lg">
-        <p class="text-xs text-center mt-2 uppercase">Equipment</p>
+    <div class=\"glass rounded-xl p-2\">
+        <img src=\"dustbin.png\" class=\"rounded-lg w-full h-32 object-cover\" alt=\"Equipment\">
+        <p class=\"text-xs text-center mt-2 uppercase\">Equipment</p>
     </div>
-    <div class="glass rounded-xl p-2">
-        <img src="glovess.jpg" class="rounded-lg">
-        <p class="text-xs text-center mt-2 uppercase">Supplies</p>
+    <div class=\"glass rounded-xl p-2\">
+        <img src=\"glovess.jpg\" class=\"rounded-lg w-full h-32 object-cover\" alt=\"Supplies\">
+        <p class=\"text-xs text-center mt-2 uppercase\">Supplies</p>
     </div>
 </div>
 
 <!-- DONATION SECTIONS -->
-<div class="grid md:grid-cols-2 gap-8">
+<div class=\"grid md:grid-cols-2 gap-8\">
 
 <!-- CASH DONATION -->
-<div class="glass-card rounded-2xl p-8 text-center border-t-4 border-blue-500">
-    <h3 class="text-2xl font-bold mb-2">Monetary Support</h3>
-    <p class="text-gray-400 text-sm mb-6">
-        Donate via UPI to our QR— funds go toward logistics & operations.
+<div class=\"glass-card rounded-2xl p-8 text-center border-t-4 border-blue-500\">
+    <h3 class=\"text-2xl font-bold mb-2\">Monetary Support</h3>
+    <p class=\"text-gray-400 text-sm mb-6\">
+        Donate via UPI — funds go toward logistics & operations.
     </p>
 
-    <button id="upiPayBtn"
-        class="w-full px-8 py-4 bg-blue-600 hover: text-white font-bold rounded-xl uppercase tracking-widest btn-hover-effect">
-        scan this qr code 
-    </button>
-    <img src="upi-qr.jpg"height="200px">
-    <P id="upiPayBtn"class="w-full px-8 py-4 bg-blue-600 hover: text-white font-bold rounded-xl uppercase tracking-widest btn-hover-effect">>pay through this Upi Apps </P>
-<!-- UPI App Buttons -->
-<div class="upi-apps">
-  <button class="upi-btn gpay" onclick="payUPI('gpay')">
-    <img src="gpay.png" alt="Google Pay">
-    <span>Google Pay</span>
-  </button>
-
-  <button class="upi-btn phonepe" onclick="payUPI('phonepe')">
-    <img src="phonepe.png" alt="PhonePe">
-    <span>PhonePe</span>
-  </button>
-
-  <button class="upi-btn paytm" onclick="payUPI('paytm')">
-    <img src="paytm.png" alt="Paytm">
-    <span>Paytm</span>
-  </button>
-
-  <button class="upi-btn other" onclick="payUPI()">
-    <span>Other UPI Apps</span>
-  </button>
-</div>
-
-
-    <!-- DESKTOP QR -->
-    <div id="desktopQR" class="hidden mt-6">
-        <img src="upi-qr.jpg" class="mx-auto w-56 h-56 rounded-xl border border-white/20">
-        <p class="text-xs text-gray-400 mt-3">
-            Scan this QR using any UPI app
-        </p>
+    <div class=\"mb-6\">
+        <img src=\"upi-qr.jpg\" class=\"mx-auto w-48 h-48 rounded-xl border border-white/20\" alt=\"UPI QR Code\">
+        <p class=\"text-xs text-gray-400 mt-3\">Scan QR using any UPI app</p>
     </div>
 
-    <p class="text-xs text-gray-500 mt-4">
-        Mobile users will be redirected to their UPI app
+    <p class=\"text-sm font-semibold text-gray-300 mb-4\">Or pay through UPI Apps</p>
+
+    <!-- UPI App Buttons -->
+    <div class=\"upi-apps\">
+        <a href=\"gpay://upi/pay?pa=6901471099@ibl&pn=RiseDH&cu=INR\" class=\"upi-btn gpay\">
+            <img src=\"gpay.png\" alt=\"Google Pay\">
+            <span>Google Pay</span>
+        </a>
+
+        <a href=\"phonepe://pay?pa=6901471099@ibl&pn=RiseDH&cu=INR\" class=\"upi-btn phonepe\">
+            <img src=\"phonepe.png\" alt=\"PhonePe\">
+            <span>PhonePe</span>
+        </a>
+
+        <a href=\"paytmmp://pay?pa=6901471099@ibl&pn=RiseDH&cu=INR\" class=\"upi-btn paytm\">
+            <img src=\"paytm.png\" alt=\"Paytm\">
+            <span>Paytm</span>
+        </a>
+
+        <a href=\"upi://pay?pa=6901471099@ibl&pn=RiseDH&cu=INR\" class=\"upi-btn other\">
+            <span>Other UPI</span>
+        </a>
+    </div>
+
+    <p class=\"text-xs text-gray-500 mt-4\">
+        UPI ID: <strong>6901471099@ibl</strong>
     </p>
 </div>
 
-<!-- MATERIAL DONATION (UNCHANGED & LINKED) -->
-<div class="glass-card rounded-2xl p-8 text-center border-t-4 border-green-500">
-    <h3 class="text-2xl font-bold mb-2">Donate Masks & Gloves</h3>
-    <p class="text-gray-400 text-sm mb-4">
+<!-- MATERIAL DONATION -->
+<div class=\"glass-card rounded-2xl p-8 text-center border-t-4 border-green-500\">
+    <h3 class=\"text-2xl font-bold mb-2\">Donate Masks & Gloves</h3>
+    <p class=\"text-gray-400 text-sm mb-4\">
         Hospital & pharmacy-grade donation drive.
     </p>
 
-    <div class="bg-yellow-500/10 border border-yellow-500/20 p-3 rounded-lg mb-6">
-        <p class="text-xs text-yellow-200 font-semibold">
+    <div class=\"bg-yellow-500/10 border border-yellow-500/20 p-3 rounded-lg mb-6\">
+        <p class=\"text-xs text-yellow-200 font-semibold\">
             Note: Only medical-grade items accepted.
         </p>
     </div>
 
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfgRW-hAI6LbaJ3sPrXSAHSfspNpKALPcfe6mCat9KA8ItLzw/viewform?usp=publish-editor"
-       target="_blank"
-       class="w-full px-8 py-4 border border-green-500/50 hover:bg-green-500/10 text-green-400 font-bold rounded-xl uppercase tracking-widest flex justify-center">
+    <button id=\"donateItemsBtn\"
+        class=\"w-full px-8 py-4 border border-green-500/50 hover:bg-green-500/10 text-green-400 font-bold rounded-xl uppercase tracking-widest transition-all\">
         Click here to donate mask & gloves
-    </a>
+    </button>
 </div>
 
 </div>
 </main>
 
+<!-- MATERIAL DONATION FORM MODAL -->
+<div id=\"donationModal\" class=\"modal-overlay\">
+    <div class=\"modal-content\">
+        <!-- Form Header -->
+        <div class=\"p-6 border-b border-white/10\">
+            <div class=\"flex justify-between items-center\">
+                <h2 class=\"text-2xl font-bold text-white\">Donate Items</h2>
+                <button id=\"closeModal\" class=\"w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors\">
+                    <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
+                        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M6 18L18 6M6 6l12 12\" />
+                    </svg>
+                </button>
+            </div>
+            <p class=\"text-gray-400 text-sm mt-2\">Fill in your details to donate masks, gloves, or supplies</p>
+        </div>
+
+        <!-- Form Content -->
+        <form id=\"donationForm\" class=\"p-6\">
+            <!-- Donor Type -->
+            <div class=\"form-group\">
+                <label class=\"form-label\">Donor Type <span class=\"required\">*</span></label>
+                <div class=\"radio-group\">
+                    <div class=\"radio-option\">
+                        <input type=\"radio\" id=\"individual\" name=\"donorType\" value=\"Individual\" required>
+                        <label for=\"individual\">Individual</label>
+                    </div>
+                    <div class=\"radio-option\">
+                        <input type=\"radio\" id=\"hospital\" name=\"donorType\" value=\"Hospital/Firm\">
+                        <label for=\"hospital\">Hospital/Firm</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Name -->
+            <div class=\"form-group\">
+                <label class=\"form-label\">Name / Organization <span class=\"required\">*</span></label>
+                <input type=\"text\" name=\"name\" class=\"form-input\" placeholder=\"Enter your name or organization\" required>
+            </div>
+
+            <!-- Phone -->
+            <div class=\"form-group\">
+                <label class=\"form-label\">Phone Number <span class=\"required\">*</span></label>
+                <input type=\"tel\" name=\"phone\" class=\"form-input\" placeholder=\"Enter your phone number\" required>
+            </div>
+
+            <!-- Item Type -->
+            <div class=\"form-group\">
+                <label class=\"form-label\">Item Type <span class=\"required\">*</span></label>
+                <select name=\"itemType\" class=\"form-input\" required>
+                    <option value=\"\" disabled selected>Select item type</option>
+                    <option value=\"Masks\">Masks</option>
+                    <option value=\"Gloves\">Gloves</option>
+                    <option value=\"Both Masks & Gloves\">Both Masks & Gloves</option>
+                    <option value=\"Other Supplies\">Other Supplies</option>
+                    <option value=\"Anything Available\">Anything Available</option>
+                </select>
+            </div>
+
+            <!-- Quantity -->
+            <div class=\"form-group\">
+                <label class=\"form-label\">Approximate Quantity <span class=\"required\">*</span></label>
+                <input type=\"text\" name=\"quantity\" class=\"form-input\" placeholder=\"e.g., 100 pieces, 2 boxes\" required>
+            </div>
+
+            <!-- Location -->
+            <div class=\"form-group\">
+                <label class=\"form-label\">Your Location <span class=\"required\">*</span></label>
+                <input type=\"text\" name=\"location\" id=\"locationInput\" class=\"form-input mb-2\" placeholder=\"Enter your address or use button below\" required>
+                <button type=\"button\" id=\"getLocationBtn\" class=\"location-btn\">
+                    <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-5 w-5\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
+                        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z\" />
+                        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M15 11a3 3 0 11-6 0 3 3 0 016 0z\" />
+                    </svg>
+                    <span id=\"locationBtnText\">Get My Location</span>
+                </button>
+                <p id=\"locationStatus\" class=\"location-status\"></p>
+                <!-- Hidden fields for coordinates -->
+                <input type=\"hidden\" name=\"latitude\" id=\"latitudeInput\">
+                <input type=\"hidden\" name=\"longitude\" id=\"longitudeInput\">
+            </div>
+
+            <button type=\"submit\" id=\"submitBtn\" class=\"w-full py-4 bg-green-600 hover:bg-green-700 text-white font-bold rounded-xl text-lg uppercase tracking-wider flex items-center justify-center transition-colors\">
+                <span class=\"spinner\"></span>
+                <span class=\"btn-text\">Submit Donation</span>
+            </button>
+        </form>
+
+        <!-- Success Message -->
+        <div id=\"successMessage\" class=\"success-message\">
+            <div class=\"success-icon\">
+                <svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">
+                    <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M5 13l4 4L19 7\" />
+                </svg>
+            </div>
+            <h3 class=\"text-2xl font-bold text-white mb-2\">Thank You!</h3>
+            <p class=\"text-gray-400 mb-6\">Your donation details have been submitted. We'll contact you soon for pickup!</p>
+            <button id=\"closeSuccess\" class=\"px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-xl transition-colors\">
+                Close
+            </button>
+        </div>
+    </div>
+</div>
+
 <!-- FOOTER -->
-<footer class="p-6 text-center text-sm text-gray-500">
-    © 2026 RiseDH — ft Langting GEN-Z.Let's make the Town shine
+<footer class=\"p-6 text-center text-sm text-gray-500\">
+    © 2026 RiseDH — ft Langting GEN-Z. Let's make the Town shine
 </footer>
 
-<!-- SCRIPT -->
+<script>
+    // ============================================
+    // GOOGLE APPS SCRIPT URL - Replace with your deployed URL
+    // ============================================
+    const DONATION_SCRIPT_URL = \"YOUR_GOOGLE_APPS_SCRIPT_URL_FOR_DONATIONS\";
 
+    // Modal Elements
+    const modal = document.getElementById('donationModal');
+    const donateBtn = document.getElementById('donateItemsBtn');
+    const closeModal = document.getElementById('closeModal');
+    const form = document.getElementById('donationForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const successMessage = document.getElementById('successMessage');
+    const closeSuccess = document.getElementById('closeSuccess');
 
+    // Location Elements
+    const getLocationBtn = document.getElementById('getLocationBtn');
+    const locationInput = document.getElementById('locationInput');
+    const locationBtnText = document.getElementById('locationBtnText');
+    const locationStatus = document.getElementById('locationStatus');
+    const latitudeInput = document.getElementById('latitudeInput');
+    const longitudeInput = document.getElementById('longitudeInput');
 
+    // Open Modal
+    donateBtn.addEventListener('click', function() {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
 
+    // Close Modal
+    function closeModalFunc() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        form.reset();
+        form.style.display = 'block';
+        successMessage.classList.remove('active');
+        resetLocationButton();
+    }
+
+    closeModal.addEventListener('click', closeModalFunc);
+    closeSuccess.addEventListener('click', closeModalFunc);
+
+    // Close on overlay click
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModalFunc();
+        }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModalFunc();
+        }
+    });
+
+    // ============================================
+    // GEOLOCATION FUNCTIONALITY
+    // ============================================
+    function resetLocationButton() {
+        getLocationBtn.classList.remove('success', 'error');
+        locationBtnText.textContent = 'Get My Location';
+        locationStatus.textContent = '';
+        latitudeInput.value = '';
+        longitudeInput.value = '';
+    }
+
+    getLocationBtn.addEventListener('click', function() {
+        // Check if geolocation is supported
+        if (!navigator.geolocation) {
+            showLocationError('Geolocation is not supported by your browser. Please enter your address manually.');
+            return;
+        }
+
+        // Check for HTTPS (required for geolocation on most browsers)
+        if (location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+            showLocationError('Location requires HTTPS. Please enter your address manually.');
+            return;
+        }
+
+        // Show loading state
+        getLocationBtn.disabled = true;
+        locationBtnText.textContent = 'Getting location...';
+        locationStatus.textContent = 'Please allow location access when prompted...';
+        locationStatus.style.color = 'rgba(255, 255, 255, 0.6)';
+
+        // Request location with options
+        const options = {
+            enableHighAccuracy: true,
+            timeout: 15000,
+            maximumAge: 0
+        };
+
+        navigator.geolocation.getCurrentPosition(
+            handleLocationSuccess,
+            handleLocationError,
+            options
+        );
+    });
+
+    function handleLocationSuccess(position) {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        const accuracy = position.coords.accuracy;
+
+        // Store coordinates
+        latitudeInput.value = lat;
+        longitudeInput.value = lng;
+
+        // Try to get address using reverse geocoding (free service)
+        reverseGeocode(lat, lng);
+    }
+
+    function reverseGeocode(lat, lng) {
+        // Using free Nominatim API (OpenStreetMap)
+        const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`;
+
+        fetch(url, {
+            headers: {
+                'Accept-Language': 'en'
+            }
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Geocoding failed');
+            return response.json();
+        })
+        .then(data => {
+            if (data && data.display_name) {
+                locationInput.value = data.display_name;
+                showLocationSuccess(`Location found! Accuracy: ~${Math.round(data.accuracy || 50)}m`);
+            } else {
+                // Fallback to coordinates if address not found
+                locationInput.value = `Lat: ${lat.toFixed(6)}, Lng: ${lng.toFixed(6)}`;
+                showLocationSuccess('Coordinates captured. Address lookup unavailable.');
+            }
+        })
+        .catch(error => {
+            // Fallback to coordinates
+            locationInput.value = `Lat: ${lat.toFixed(6)}, Lng: ${lng.toFixed(6)}`;
+            showLocationSuccess('Location captured as coordinates.');
+        });
+    }
+
+    function handleLocationError(error) {
+        let message = '';
+        
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                message = 'Location access denied. Please enable location in your browser settings or enter address manually.';
+                break;
+            case error.POSITION_UNAVAILABLE:
+                message = 'Location unavailable. Please check your device settings or enter address manually.';
+                break;
+            case error.TIMEOUT:
+                message = 'Location request timed out. Please try again or enter address manually.';
+                break;
+            default:
+                message = 'Unable to get location. Please enter your address manually.';
+        }
+        
+        showLocationError(message);
+    }
+
+    function showLocationSuccess(message) {
+        getLocationBtn.disabled = false;
+        getLocationBtn.classList.remove('error');
+        getLocationBtn.classList.add('success');
+        locationBtnText.textContent = 'Location Found';
+        locationStatus.textContent = message;
+        locationStatus.style.color = '#22c55e';
+    }
+
+    function showLocationError(message) {
+        getLocationBtn.disabled = false;
+        getLocationBtn.classList.remove('success');
+        getLocationBtn.classList.add('error');
+        locationBtnText.textContent = 'Try Again';
+        locationStatus.textContent = message;
+        locationStatus.style.color = '#f87171';
+    }
+
+    // ============================================
+    // FORM SUBMISSION
+    // ============================================
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        // Show loading state
+        submitBtn.classList.add('btn-loading');
+        submitBtn.disabled = true;
+
+        // Collect form data
+        const formData = new FormData(form);
+        const data = {
+            donorType: formData.get('donorType'),
+            name: formData.get('name'),
+            phone: formData.get('phone'),
+            itemType: formData.get('itemType'),
+            quantity: formData.get('quantity'),
+            location: formData.get('location'),
+            latitude: formData.get('latitude') || '',
+            longitude: formData.get('longitude') || '',
+            timestamp: new Date().toISOString()
+        };
+
+        try {
+            // Send data to Google Sheets via Apps Script
+            const response = await fetch(DONATION_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+
+            // Show success message
+            form.style.display = 'none';
+            successMessage.classList.add('active');
+
+        } catch (error) {
+            console.error('Error:', error);
+            alert('There was an error submitting your form. Please try again.');
+        } finally {
+            submitBtn.classList.remove('btn-loading');
+            submitBtn.disabled = false;
+        }
+    });
+</script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
